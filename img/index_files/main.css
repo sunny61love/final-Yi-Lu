@@ -1,0 +1,109 @@
+body {
+	width: 100%;
+}
+
+html, body {
+    height: 100%;
+}
+
+.sky {
+    height: 100%;
+    width: auto;
+    margin: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.plane {
+
+    position: fixed;
+    left: 50%;
+    bottom: 0%;
+    margin-left: -67px;
+    -webkit-transform: rotate(0deg);
+}
+
+.hearts1{
+     float: right;
+    position: fixed;
+    left: 70%;
+
+   height: 10%;
+   
+   
+
+}
+.hearts2{
+     float: right;
+    position: fixed;
+    left: 80%;
+
+   height: 10%;
+   
+   
+
+}
+.hearts3{
+     float: right;
+    position: fixed;
+    left: 90%;
+
+   height: 10%;
+   
+   
+
+}
+
+.badplane1{
+    float: right;
+    position: absolute;
+    left: 20%;
+}
+
+.badplane2{
+    float: right;
+    position: absolute;
+    left: 30%;
+   
+}
+.badplane3{
+    float: right;
+    position: absolute;
+    left: 40%;
+    
+}
+.badplane4{
+    float: right;
+    position: absolute;
+    left: 50%;
+
+}
+
+.badplane5{
+    float: right;
+    position: absolute;
+    left: 60%;
+
+}
+.badplane6{
+    float: right;
+    position: absolute;
+    left: 70%;
+
+}
+.badplane7{
+    float: right;
+    position: absolute;
+    left: 20%;
+    top: 20%;
+
+}
+.badplane8{
+    float: right;
+    position: absolute;
+    left: 30%;
+
+}
