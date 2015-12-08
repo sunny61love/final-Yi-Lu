@@ -201,6 +201,13 @@ h1 {
     background:url("../img/BULLET.png") no-repeat;
 }
 
+.enemy{
+    width:150px;
+    height:150px;
+    position: absolute;
+    background:url("../img/badplane.gif") no-repeat;
+}
+
 .invisible{
     display:none;
 }
