@@ -69,7 +69,7 @@ html, body {
 }
 
 .score {
-    color: pink;
+    color: blue;
     font-size: 70px;
     margin: auto;
     position: fixed;
@@ -78,10 +78,23 @@ html, body {
     right: 0;
     bottom: 0;
 }
+
+.time {
+    color: green;
+    font-size: 40px;
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 150px;
+}
+
 .container {
     height: 100%;
-    width: auto;
-    margin: auto;
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;

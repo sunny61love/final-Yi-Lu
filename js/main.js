@@ -4,14 +4,33 @@ var enemies = [];
 // bullet
 var allBullets = [];
 
+// bullet index
+var bulletFrameCount = 0;
+
+// play sound
+// source: https://github.com/admsev/jquery-play-sound/blob/master/jquery.playSound.js
+(function($) {
+
+	$.extend({
+		playSound: function() {
+			return $("<audio autoplay='autoplay' style='display:none;' controls='controls'><source src='" + arguments[0] + ".mp3' /><source src='" + arguments[0] + ".ogg' /></audio>").appendTo('body');
+		},
+		playSoundLoop: function() {
+			return $("<audio autoplay='autoplay' style='display:none;' controls='controls' loop='true'><source src='" + arguments[0] + ".mp3' /><source src='" + arguments[0] + ".ogg' /></audio>").appendTo('body');
+		}
+	});
+
+})(jQuery);
+
 // fire a bullet
 var fireBullet = function() {
+	playFireSound();
+	bulletFrameCount++;
 	// every time we add a new bullet, check the front of allBullets
-	if (allBullets && allBullets.length > 0) {
+	if (bulletFrameCount > 3) {
 		var firstBullet = allBullets[0];
-		if (firstBullet.position().top <= -2000) {
-			allBullets.shift();
-		}
+		firstBullet.detach();
+		allBullets.shift();
 	}
 
 	// generate a new bullet
@@ -80,6 +99,14 @@ var enemyPlay = function() {
 // game loop
 var gamePlay = function() {
 	enemyPlay();
+	var current_time = (new Date()).getTime();
+	var delta = parseInt((end_frame - current_time) / 1000);
+
+	$('.time').text('Time:' + delta + 's');
+
+	if (delta <= 0) {
+		gameEnd();
+	}
 };
 
 
@@ -151,10 +178,45 @@ $(document).ready(function() {
 		}
 	});
 });
+
+// play the fire audio
+var playFireSound = function() {
+	// play sound
+	$.playSound('audio/bullet');
+}
+
+var inter_gameplay = 0;
+var inter_fire = 0;
+
+// total game frame
+var end_frame = 0;
+
+
+var gameEnd = function() {
+	// clear all sound
+	$('audio').each(function(i, $audio) {
+		$(this).detach();
+	});
+
+	// set time to 0
+	$('.time').text('Time:0s');
+
+	// display button
+	$('input').css('display', 'block');
+
+	// clear interval functions
+	clearInterval(inter_gameplay);
+	clearInterval(inter_fire);
+}
+
 $(document).ready(function() {
 	$('input').click(function() {
-		setInterval(gamePlay);
-		setInterval(fireBullet, 400);
+		$.playSoundLoop('audio/bg');
+		inter_gameplay = setInterval(gamePlay);
+		inter_fire = setInterval(fireBullet, 400);
+
+		end_frame = (new Date()).getTime() + 30 * 1000;
+		$('.score').text(0);
 		$('.container').css('display', 'block');
 		$('input').css('display', 'none');
 	});
