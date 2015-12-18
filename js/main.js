@@ -57,10 +57,16 @@ var enemyPlay = function() {
 				bulletPosition.top <= enemyPosition.top &&
 				bulletPosition.top >= enemyPosition.top - enemyHeight) {
 				// delete from enemies
-				enemy.css({
-					display: 'none'
-				});
+				// enemy.css({
+				// 	display: 'none'
+				// });
+				enemy.remove();
 				enemies.splice(i, 1);
+
+				// change score
+				var score = $('.score').text();
+				var score_num = parseInt(score);
+				$('.score').text(score_num + 1);
 
 				bullet.css({
 					display: 'none'
@@ -76,10 +82,16 @@ var gamePlay = function() {
 	enemyPlay();
 };
 
-$(document).ready(function() {
-	// generate 8 enemies in the array
+
+var loadenemies = function() {
 	var init_x = 10;
-	while (!enemies || enemies.length < 8) {
+	while (!enemies || enemies.length < 9) {
+
+		$('.enemy').each(function(i, $enemy) {
+			$(this).css('left', (i * 150 + 150) + 'px');
+		})
+
+
 		var newEnemy = $('<div>').addClass('enemy').appendTo('.enemies');
 		var randomTop = Math.random() * 200;
 		var randomLeft = init_x + Math.random() * 50 + 150;
@@ -90,6 +102,14 @@ $(document).ready(function() {
 		});
 		enemies.push(newEnemy);
 	}
+}
+
+
+$(document).ready(function() {
+	// generate 9 enemies in the array 
+	setInterval(loadenemies, 5000);
+	loadenemies();
+
 
 	$(document).keydown(function(key) {
 		switch (parseInt(key.which, 10)) {
@@ -115,7 +135,7 @@ $(document).ready(function() {
 				break;
 				// Down Arrow Pressed
 			case 40:
-				if ($('.plane').position().top < $(window).height() - $('.plane').height() ) {
+				if ($('.plane').position().top < $(window).height() - $('.plane').height()) {
 					$('.plane').animate({
 						top: "+=20px"
 					}, 0); // Put our code here
@@ -134,7 +154,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$('input').click(function() {
 		setInterval(gamePlay);
-		setInterval(fireBullet, 600);
+		setInterval(fireBullet, 400);
 		$('.container').css('display', 'block');
 		$('input').css('display', 'none');
 	});
